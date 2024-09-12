@@ -15,7 +15,7 @@ export default function Modal({onClose, hits}) {
 	
 	useEffect(() => {
 		window.addEventListener('keydown', handleKeyDown);
-	}, []);
+	});
 
 	const handleBackdropClick = e => {
 		if(e.currentTarget === e.target) {

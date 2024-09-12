@@ -95,7 +95,6 @@ export default function App() {
         setHits(state => [...state, ...hits])
       } else {
         setHits(hits);
-        setPage(1);
       }
       setTotalHits(totalHits);
       setStatus(Status.RESOLVED);
