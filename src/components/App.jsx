@@ -32,32 +32,54 @@ export default function App() {
 		// console.log(searchQuery);
 		// Добавляем значение в наш стейт
 		setSearchQuery(searchQuery);
+    setPage(1);
 	};
 
   // //! Для изменения запроса
-  useEffect(() => {
-    if (searchQuery === '') {
-      return;
-    }
-    setStatus(Status.PENDING);
+  // useEffect(() => {
+  //   if (searchQuery === '') {
+  //     return;
+  //   }
+  //   setStatus(Status.PENDING);
     
 
-    pixabayAPI
-    .fetchImage(searchQuery, page, per_page)
-    .then(res => {
-      const { hits, totalHits } = res;
-      setHits(hits);
-      setPage(1);
-      setTotalHits(totalHits);
-      setStatus(Status.RESOLVED);
-    })
-    .catch( error => {
-      console.log(error);
-      setStatus(Status.REJECTED);
-    })
-  }, [searchQuery]);
+  //   pixabayAPI
+  //   .fetchImage(searchQuery, page, per_page)
+  //   .then(res => {
+  //     const { hits, totalHits } = res;
+  //     setHits(hits);
+  //     setPage(1);
+  //     setTotalHits(totalHits);
+  //     setStatus(Status.RESOLVED);
+  //   })
+  //   .catch( error => {
+  //     console.log(error);
+  //     setStatus(Status.REJECTED);
+  //   })
+  // }, [searchQuery]);
 
-   //! для изменения страницы 
+  //  //! для изменения страницы 
+  // useEffect(() => {
+  //   if (searchQuery === '') {
+  //     return;
+  //   }
+  //   setStatus(Status.PENDING);
+
+  //   pixabayAPI
+  //   .fetchImage(searchQuery, page, per_page)
+  //   .then(res => {
+  //     const { hits, totalHits } = res;
+  //     setHits(state => [...state, ...hits]);
+  //     setTotalHits(totalHits);
+  //     setStatus(Status.RESOLVED);
+  //   })
+  //   .catch( error => {
+  //     console.log(error);
+  //     setStatus(Status.REJECTED);
+  //   })
+  // }, [page]);
+
+  //! для изменения страницы 
   useEffect(() => {
     if (searchQuery === '') {
       return;
@@ -68,7 +90,13 @@ export default function App() {
     .fetchImage(searchQuery, page, per_page)
     .then(res => {
       const { hits, totalHits } = res;
-      setHits(state => [...state, ...hits]);
+
+      if (page > 1) {
+        setHits(state => [...state, ...hits])
+      } else {
+        setHits(hits);
+        setPage(1);
+      }
       setTotalHits(totalHits);
       setStatus(Status.RESOLVED);
     })
@@ -76,7 +104,8 @@ export default function App() {
       console.log(error);
       setStatus(Status.REJECTED);
     })
-  }, [page]);
+  }, [searchQuery, page]);
+
 
   const onLoadMore = (e) => {
     setPage(state => state + 1);

@@ -12,7 +12,6 @@ export default function Modal({onClose, hits}) {
 			onClose();
 		}
 	};
-
 	
 	useEffect(() => {
 		window.addEventListener('keydown', handleKeyDown);
