@@ -20,7 +20,7 @@ const Status = {
 export default function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [per_page, setPer_page] = useState(12);
+  const per_page = 12;
   const [hits, setHits] = useState([]);
   const [totalHits, setTotalHits] = useState(null);
   const [status, setStatus] = useState(Status.IDLE);
