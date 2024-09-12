@@ -31,6 +31,7 @@ export default function App() {
   const handlFormSubmit = searchQuery => {
 		// console.log(searchQuery);
 		// Добавляем значение в наш стейт
+    setHits([])
 		setSearchQuery(searchQuery);
     setPage(1);
 	};
@@ -42,7 +43,6 @@ export default function App() {
   //   }
   //   setStatus(Status.PENDING);
     
-
   //   pixabayAPI
   //   .fetchImage(searchQuery, page, per_page)
   //   .then(res => {
@@ -57,6 +57,7 @@ export default function App() {
   //     setStatus(Status.REJECTED);
   //   })
   // }, [searchQuery]);
+
 
   //  //! для изменения страницы 
   // useEffect(() => {
@@ -79,7 +80,7 @@ export default function App() {
   //   })
   // }, [page]);
 
-  //! для изменения страницы 
+  //! для изменения страницы + запроса
   useEffect(() => {
     if (searchQuery === '') {
       return;
